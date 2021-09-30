@@ -1,0 +1,10 @@
+[profile.dev]
+codegen-units = 4
+
+[workspace]
+members = [
+    "rdbc-async",
+    "rdbc-async-postgres"
+]
+#[patch.crates-io]
+#lexical-sql = {git = 'https://github.com/Gelbpunkt/rust-lexical', branch = 'fix-warnings-and-update-deps'}

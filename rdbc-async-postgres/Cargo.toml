@@ -1,0 +1,15 @@
+[package]
+name = "rdbc-async-postgres"
+version = "0.0.1"
+authors = ["ATM <naik.atmaram@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rdbc-async= { path= "../rdbc-async" }
+async-trait = "0.1.51"
+tokio = { version = "1.12.0", features = [ "full" ] }
+tokio-postgres = "0.7.3"
+sqlparser = "0.11.0"
+futures-util = "0.3.17"

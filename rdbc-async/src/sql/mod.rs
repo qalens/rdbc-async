@@ -26,7 +26,7 @@ pub trait Driver: Sync + Send {
 }
 
 #[async_trait]
-pub trait Connection {
+pub trait Connection : Sync + Send {
     /// Create a statement for execution
     async fn create(&self, sql: &str) -> Result<Box<dyn Statement + '_>>;
 

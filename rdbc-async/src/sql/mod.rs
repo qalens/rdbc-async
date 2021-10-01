@@ -36,7 +36,7 @@ pub trait Connection : Sync + Send {
 
 /// Represents an executable statement
 #[async_trait]
-pub trait Statement {
+pub trait Statement : Sync + Send  {
     /// Execute a query that is expected to return a result set, such as a `SELECT` statement
     async fn execute_query(&self, params: Vec<Value>) -> Result<Box<dyn ResultSet + '_>>;
 

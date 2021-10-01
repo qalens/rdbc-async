@@ -204,7 +204,11 @@ impl rdbc_async::sql::ResultSet for ResultSet {
 
     async fn absolute(&mut self,row:u64) -> bool {
         if self.fetched_rows.len() as u64 <= row {
-            self.current_row_index = self.fetched_rows.len() as u64 - 1;
+            self.current_row_index =if self.fetched_rows.len() == 0 {
+                0
+            } else {
+                self.fetched_rows.len() as u64 - 1
+            };
             while self.next().await {
                 if self.current_row_index == row {
                     break;

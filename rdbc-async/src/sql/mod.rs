@@ -38,10 +38,10 @@ pub trait Connection : Sync + Send {
 #[async_trait]
 pub trait Statement {
     /// Execute a query that is expected to return a result set, such as a `SELECT` statement
-    async fn execute_query(&self, params: &[Value]) -> Result<Box<dyn ResultSet + '_>>;
+    async fn execute_query(&self, params: Vec<Value>) -> Result<Box<dyn ResultSet + '_>>;
 
     /// Execute a query that is expected to update some rows.
-    async fn execute_update(&self, params: &[Value]) -> Result<u64>;
+    async fn execute_update(&self, params: Vec<Value>) -> Result<u64>;
 }
 
 /// Result set from executing a query against a statement

@@ -81,7 +81,7 @@ struct Statement<'a> {
 impl<'a> rdbc_async::sql::Statement for Statement<'a> {
     async fn execute_query(
         &self,
-        params: &[rdbc_async::sql::Value],
+        params: Vec<rdbc_async::sql::Value>,
     ) -> rdbc_async::sql::Result<Box<dyn rdbc_async::sql::ResultSet + '_>> {
 
         let rows = self
@@ -101,7 +101,7 @@ impl<'a> rdbc_async::sql::Statement for Statement<'a> {
         Ok(Box::new(ResultSet { fetched_rows:HashMap::new(),current_row_index:0,current_row:Option::None,rows:Box::pin(rows) }))
     }
 
-    async fn execute_update(&self, params: &[rdbc_async::sql::Value]) -> rdbc_async::sql::Result<u64> {
+    async fn execute_update(&self, params: Vec<rdbc_async::sql::Value>) -> rdbc_async::sql::Result<u64> {
         self.conn
             .execute_raw(self.sql.as_str(), params.iter().map(|d|{
                 match d {

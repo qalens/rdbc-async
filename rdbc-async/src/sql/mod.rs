@@ -63,8 +63,8 @@ pub trait ResultSet {
     /// Move the cursor to the next available row if one exists and return true if it does
     async fn absolute(&mut self,row:u64) -> bool;
     //
-    // /// Move the cursor to the next available row if one exists and return true if it does
-    // async fn relative(&mut self) -> bool;
+    /// Move the cursor to the next available row if one exists and return true if it does
+    async fn relative(&mut self,row:i64) -> bool;
 
     fn get_i8(&self, i: u64) -> Result<i8>;
     fn get_i16(&self, i: u64) -> Result<i16>;

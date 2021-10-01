@@ -497,14 +497,14 @@ dependencies = [
 
 [[package]]
 name = "rdbc-async"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
  "async-trait",
 ]
 
 [[package]]
 name = "rdbc-async-postgres"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
  "async-trait",
  "futures-util",

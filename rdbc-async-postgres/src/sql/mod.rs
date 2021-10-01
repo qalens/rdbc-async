@@ -204,12 +204,15 @@ impl rdbc_async::sql::ResultSet for ResultSet {
 
     async fn absolute(&mut self,row:u64) -> bool {
         if self.fetched_rows.len() as u64 <= row {
-            self.current_row_index = self.fetched_rows.len() as u64 -1;
+            self.current_row_index = self.fetched_rows.len() as u64 - 1;
             while self.next().await {
                 if self.current_row_index == row {
                     break;
                 }
             }
+        } else {
+            self.current_row_index = row;
+            self.current_row = self.fetched_rows.get(&row).map(|ref_arc|ref_arc.clone())
         }
 
         if let Some(_) = self.fetched_rows.get(&row) {
@@ -218,6 +221,15 @@ impl rdbc_async::sql::ResultSet for ResultSet {
             false
         }
 
+    }
+
+    async fn relative(&mut self,relative:i64) -> bool {
+        let row = if relative < 0 {
+            self.current_row_index - ((relative*(-1)) as u64)
+        } else {
+            self.current_row_index +(relative as u64)
+        };
+        return self.absolute(row).await;
     }
 
     impl_resultset_fns! {

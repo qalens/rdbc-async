@@ -46,7 +46,7 @@ pub trait Statement : Sync + Send  {
 
 /// Result set from executing a query against a statement
 #[async_trait]
-pub trait ResultSet {
+pub trait ResultSet : Sync + Send {
 
     /// Move the cursor to the next available row if one exists and return true if it does
     async fn next(&mut self) -> bool;
